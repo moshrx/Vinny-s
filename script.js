@@ -84,33 +84,37 @@ function renderMenu(category) {
     const filtered = category === 'All' ? menuData : menuData.filter(i => i.category === category);
 
     const html = filtered.map(item => `
-        <div class="bg-white p-4 rounded-3xl shadow-sm border border-stone-100 flex gap-4 relative overflow-hidden group hover:shadow-md transition-all duration-300 animate-fade-in">
-            ${item.itemDeal ? `<div class="absolute top-0 right-0 bg-yellow-400 text-[10px] font-black px-3 py-1 rounded-bl-xl uppercase z-10">Special</div>` : ''}
+        <div class="bg-white p-3 rounded-2xl shadow-sm border border-stone-100 flex gap-3 relative overflow-hidden group hover:shadow-md transition-all duration-300 animate-fade-in items-center">
             
-            <div class="w-24 h-24 rounded-2xl bg-stone-200 overflow-hidden flex-shrink-0 relative">
+            <div class="w-16 h-16 rounded-xl bg-stone-200 overflow-hidden flex-shrink-0 relative">
                 <img 
                     src="${item.image || 'https://via.placeholder.com/150'}" 
                     loading="lazy" 
-                    class="w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:scale-105" 
+                    class="w-full h-full object-cover opacity-0 transition-opacity duration-500" 
                     alt="${item.name}"
                     onload="this.classList.remove('opacity-0'); this.parentElement.classList.remove('animate-pulse')"
                 >
             </div>
 
-            <div class="flex-1">
-                <div class="flex justify-between items-start">
-                    <h3 class="font-bold text-lg leading-tight">${item.name}</h3>
-                    <span class="text-green-700 font-bold bg-green-50 px-2 py-1 rounded-lg text-sm">${item.price}</span>
+            <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-start gap-2">
+                    <h3 class="font-bold text-sm md:text-base leading-tight truncate text-stone-800">${item.name}</h3>
+                    <span class="text-green-700 font-bold text-xs md:text-sm whitespace-nowrap">${item.price}</span>
                 </div>
-                <p class="text-stone-500 text-xs mt-1 leading-snug">${item.description}</p>
-                ${item.itemDeal ? `<p class="text-red-600 text-[10px] font-black mt-2 uppercase flex items-center">✨ ${item.itemDeal}</p>` : ''}
+                <p class="text-stone-500 text-[11px] md:text-xs mt-0.5 leading-tight line-clamp-1">${item.description}</p>
+                
+                ${item.itemDeal ? `
+                    <p class="text-red-600 text-[9px] font-black mt-1 uppercase flex items-center tracking-tighter">
+                        ✨ ${item.itemDeal}
+                    </p>` : ''}
             </div>
+
+            ${item.itemDeal ? `<div class="absolute top-0 right-0 bg-yellow-400 w-2 h-2 rounded-bl-full"></div>` : ''}
         </div>
     `).join('');
 
     grid.innerHTML = html;
 }
-
 // Back to Top Logic
 const backToTopBtn = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {

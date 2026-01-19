@@ -67,3 +67,67 @@ html {
     background: linear-gradient(to left, rgba(250, 250, 249, 1), transparent);
     pointer-events: none;
 }
+
+/* style.css additions */
+
+/* Make headings smaller on mobile */
+@media (max-width: 768px) {
+    h2.text-5xl { font-size: 2.5rem !important; }
+    section { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+    #menu { padding-top: 1rem !important; }
+}
+
+/* Tighter line clamping for descriptions */
+.line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+/* Smooth active state for filter buttons */
+.filter-btn {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    font-size: 0.7rem !important;
+}
+
+/* Final UX Polish */
+
+/* Fix for horizontal card spacing on very small screens */
+#menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+}
+
+@media (min-width: 768px) {
+    #menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Ensure the sticky ticker doesn't overlap content on small height screens */
+#ticker-wrap span {
+    display: inline-block;
+    padding: 0 1rem;
+}
+
+/* Prevent text overflow on the 'Back to Top' button's shadow */
+#backToTop {
+    will-change: transform, opacity;
+}
+
+/* Custom shadow for the compact cards to make them look more 'Apple-style' */
+.group {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Improves the feel of the horizontal category scroll */
+#filter-bar {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.filter-btn {
+    scroll-snap-align: start;
+}
